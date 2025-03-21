@@ -1,7 +1,7 @@
-#include <memory>
 #include <string>
 #include <vector>
 #include <cstdlib>
+#include <memory>
 #include <iostream>
 
 #define println(x) std::cout << x << std::endl
@@ -38,7 +38,6 @@ class library {
     return -1;
   }
 
-  
 public:
   library(){
     println("Library Name: ");
@@ -110,10 +109,6 @@ public:
   }
 };
 
-
-#include <memory>
-#include <iostream>
-
 int main() {
   std::unique_ptr<library> l = std::make_unique<library>();
   std::string input;
@@ -159,10 +154,10 @@ int main() {
       std::string book_id_str = get_input();
       int book_id;
       try {
-	book_id = std::stoi(book_id_str);
+        book_id = std::stoi(book_id_str);
       } catch (...) {
-	println("Invalid ID. Please enter a number.");
-	continue;
+        println("Invalid ID. Please enter a number.");
+        continue;
       }
       
       l->remove_book(book_id);
@@ -174,16 +169,16 @@ int main() {
       std::string book_id_str = get_input();
       int book_id;
       try {
-	book_id = std::stoi(book_id_str);
+        book_id = std::stoi(book_id_str);
       } catch (...) {
-	println("Invalid ID. Please enter a number.");
-	continue;
+        println("Invalid ID. Please enter a number.");
+        continue;
       }
       
       if (l->borrow_book(book_id)) {
-	println("Book borrowed successfully.");
+        println("Book borrowed successfully.");
       } else {
-	println("Book is either already borrowed or does not exist.");
+        println("Book is either already borrowed or does not exist.");
       }
       break;
     }
@@ -192,16 +187,16 @@ int main() {
       std::string book_id_str = get_input();
       int book_id;
       try {
-	book_id = std::stoi(book_id_str);
+        book_id = std::stoi(book_id_str);
       } catch (...) {
-	println("Invalid ID. Please enter a number.");
-	continue;
+        println("Invalid ID. Please enter a number.");
+        continue;
       }
       
       if (l->get_book_status(book_id)) {
-	println("The book is currently borrowed.");
+        println("The book is currently borrowed.");
       } else {
-	println("The book is available.");
+        println("The book is available.");
       }
       break;
     }
