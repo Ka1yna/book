@@ -1,3 +1,4 @@
+#include <memory>
 #include <string>
 #include <vector>
 #include <cstdlib>
@@ -108,3 +109,105 @@ public:
     return 0;  // Return 0 if not found
   }
 };
+
+
+#include <memory>
+#include <iostream>
+
+int main() {
+  std::unique_ptr<library> l = std::make_unique<library>();
+  std::string input;
+  
+  while (true) {
+    println("\nLibrary Menu:");
+    println("Option 1: Add Book");
+    println("Option 2: Remove Book");
+    println("Option 3: Borrow Book");
+    println("Option 4: Check Book Status");
+    println("Option 5: Exit");
+
+    println("Select Option (1-5): ");
+    input = get_input();
+    
+    // Ensure valid integer input
+    int choice;
+    try {
+      choice = std::stoi(input);
+    } catch (...) {
+      println("Invalid input! Please enter a number between 1-5.");
+      continue;
+    }
+    
+    if (choice < 1 || choice > 5) {
+      println("Invalid option. Try again.");
+      continue;
+    }
+    
+    switch (choice) {
+    case 1: {  // Add Book
+      println("Enter Book Name: ");
+      std::string book_name = get_input();
+      println("Enter Author Name: ");
+      std::string author_name = get_input();
+      
+      int id = l->add_book(book_name, author_name);
+      println("Book Added! ID is: " + std::to_string(id));
+      break;
+    }
+    case 2: {  // Remove Book
+      println("Enter Book ID to remove: ");
+      std::string book_id_str = get_input();
+      int book_id;
+      try {
+	book_id = std::stoi(book_id_str);
+      } catch (...) {
+	println("Invalid ID. Please enter a number.");
+	continue;
+      }
+      
+      l->remove_book(book_id);
+      println("Book removed if it existed.");
+      break;
+    }
+    case 3: {  // Borrow Book
+      println("Enter Book ID to borrow: ");
+      std::string book_id_str = get_input();
+      int book_id;
+      try {
+	book_id = std::stoi(book_id_str);
+      } catch (...) {
+	println("Invalid ID. Please enter a number.");
+	continue;
+      }
+      
+      if (l->borrow_book(book_id)) {
+	println("Book borrowed successfully.");
+      } else {
+	println("Book is either already borrowed or does not exist.");
+      }
+      break;
+    }
+    case 4: {  // Check Book Status
+      println("Enter Book ID to check: ");
+      std::string book_id_str = get_input();
+      int book_id;
+      try {
+	book_id = std::stoi(book_id_str);
+      } catch (...) {
+	println("Invalid ID. Please enter a number.");
+	continue;
+      }
+      
+      if (l->get_book_status(book_id)) {
+	println("The book is currently borrowed.");
+      } else {
+	println("The book is available.");
+      }
+      break;
+    }
+    case 5:  // Exit
+      println("Exiting Library System. Goodbye!");
+      return 0;
+    }
+  }
+}
