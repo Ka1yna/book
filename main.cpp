@@ -4,6 +4,7 @@
 #include <memory>
 #include <iostream>
 
+#define print(x) std::cout << x;
 #define println(x) std::cout << x << std::endl
 
 std::string get_input();
@@ -40,12 +41,12 @@ class library {
 
 public:
   library(){
-    println("Library Name: ");
+    print("Library Name: ");
     std::string library_name = get_input();
 
-    println("Enter first Book: ");
+    print("Enter first Book: ");
     std::string book_name = get_input();
-    println("Enter Author Name: ");
+    print("Enter Author Name: ");
     std::string book_author = get_input();
 
     this->name = library_name;
@@ -56,7 +57,7 @@ public:
         false,
       });
 
-    println("Bookshop " + this->name + "created!");
+    println("Bookshop " + this->name + " created!");
   }
 
   int add_book(std::string name, std::string author){
@@ -121,7 +122,7 @@ int main() {
     println("Option 4: Check Book Status");
     println("Option 5: Exit");
 
-    println("Select Option (1-5): ");
+    print("Select Option (1-5): ");
     input = get_input();
     
     // Ensure valid integer input
@@ -140,9 +141,9 @@ int main() {
     
     switch (choice) {
     case 1: {  // Add Book
-      println("Enter Book Name: ");
+      print("Enter Book Name: ");
       std::string book_name = get_input();
-      println("Enter Author Name: ");
+      print("Enter Author Name: ");
       std::string author_name = get_input();
       
       int id = l->add_book(book_name, author_name);
@@ -150,7 +151,7 @@ int main() {
       break;
     }
     case 2: {  // Remove Book
-      println("Enter Book ID to remove: ");
+      print("Enter Book ID to remove: ");
       std::string book_id_str = get_input();
       int book_id;
       try {
@@ -165,7 +166,7 @@ int main() {
       break;
     }
     case 3: {  // Borrow Book
-      println("Enter Book ID to borrow: ");
+      print("Enter Book ID to borrow: ");
       std::string book_id_str = get_input();
       int book_id;
       try {
@@ -183,7 +184,7 @@ int main() {
       break;
     }
     case 4: {  // Check Book Status
-      println("Enter Book ID to check: ");
+      print("Enter Book ID to check: ");
       std::string book_id_str = get_input();
       int book_id;
       try {
